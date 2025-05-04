@@ -7,6 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ReceiptTest {
     private ItemDTO itemToAddToSale;
     private int quantityOfItemToAdd;
@@ -24,6 +27,18 @@ public class ReceiptTest {
     public void tearDown() {
         itemToAddToSale = null;
         paidAmt = null;
+    }
+
+    @Test 
+    public void testGetQuantityOfAnItem(){
+        Receipt receiptToTest = new Receipt();
+        List<ItemDTO> boughtItems = new ArrayList<>();
+        boughtItems.add(itemToAddToSale);
+        boughtItems.add(itemToAddToSale);
+        boughtItems.add(itemToAddToSale);
+
+        int quantityOfItemToAddToSale = receiptToTest.getQuantityOfAnItem(itemToAddToSale, boughtItems);
+        assertEquals(3, quantityOfItemToAddToSale, "Quantity of item1 should be 3");
     }
 
     @Test

@@ -10,7 +10,9 @@ public class ItemRegistryTest {
 
     @BeforeEach
     public void setUp() {
-       itemWithIdentifier12345 = new ItemDTO(12345, null, null, 0, 0);
+        itemWithIdentifier12345 = new ItemDTO(12345,
+         "BigWheel Oatmeal 500g, whole grain oats, high fiber, gluten free",
+          "BigWheel Oatmeal", 29.90, 6);
     }
 
     @AfterEach
@@ -20,10 +22,8 @@ public class ItemRegistryTest {
     @Test
     public void testFindItem() {
         ItemRegistry instance = new ItemRegistry();
-        ItemDTO expResult = null;
+        ItemDTO expResult = itemWithIdentifier12345;
         ItemDTO result = instance.findItem(itemWithIdentifier12345.getIdentifier());
         assertEquals(expResult, result, "Item in inventory was found");
-
-
     }
 }

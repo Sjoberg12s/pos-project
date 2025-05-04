@@ -1,4 +1,7 @@
 package se.kth.iv1350.pos.integration;
+
+import java.util.Objects;
+
 /**
  * A class that acts like a item in the store and is only used for get methods to retrieve
  * stuff from that item.
@@ -75,5 +78,17 @@ public class ItemDTO {
         }else{
             return false;
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        ItemDTO itemDTO = (ItemDTO) obj;
+        return identifier == itemDTO.identifier &&
+            Double.compare(itemDTO.price, price) == 0 &&
+            Double.compare(itemDTO.VAT, VAT) == 0 &&
+            name.equals(itemDTO.name) &&
+            itemDescription.equals(itemDTO.itemDescription);
     }
 }

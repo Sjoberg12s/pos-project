@@ -93,9 +93,9 @@ public class Receipt {
         return totalVAT;
     }
 
-    public int getQuantityOfAnItem(ItemDTO itemToFindQuantityOf, List<ItemDTO> bougthItems){
+    public int getQuantityOfAnItem(ItemDTO itemToFindQuantityOf, List<ItemDTO> bougthItemsToCheck){
         int count = 0;
-        for (ItemDTO currentItem: boughtItems){
+        for (ItemDTO currentItem: bougthItemsToCheck){
 
             if (currentItem.getIdentifier() == itemToFindQuantityOf.getIdentifier()){
                 count++;
