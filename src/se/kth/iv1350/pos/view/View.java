@@ -18,6 +18,10 @@ public class View {
         this.contr = contr;
     }
 
+    /**
+     * Runs the fake execution of the progra, it is a simulation of how
+     * a pos works.
+     */
     public void runFakeExecution(){
         contr.startSale();
         System.out.println("A new sale has been started.");
@@ -68,13 +72,17 @@ public class View {
     }
 
     /**
-     * Prints the running total for the current sale
-     * @param currentSale the current sale that contains the running total, items etc.
+     * Prints the running total for the current sale.
+     * @param totalCost the current total cost of the sale.
      */
     public void printRunningTotal(double totalCost){
         System.out.printf("Total cost (incl VAT): %.2f SEK%n\n", totalCost);
     }
 
+    /**
+     * Prints the running VAT for the current sale.
+     * @param totalVAT the current total VAT of the sale.
+     */
     public void printRunningVAT(double totalVAT){
         System.out.printf("Total VAT: %.2f SEK%n\n", totalVAT);
     }

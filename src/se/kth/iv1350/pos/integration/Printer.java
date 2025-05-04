@@ -1,10 +1,11 @@
 package se.kth.iv1350.pos.integration;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import se.kth.iv1350.pos.model.Receipt;
 
+/**
+ * Represents a printer that prints out the receipt from a sale that has
+ * occured.
+ */
 public class Printer {
     /**
      * Creates a new instance, is used to print out the receipt.

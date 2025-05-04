@@ -7,7 +7,8 @@ import se.kth.iv1350.pos.integration.DiscountDTO;
 import se.kth.iv1350.pos.integration.ItemDTO;
 
 /**
- * One single sale made by one single customer and payed with one payment
+ * This represents a sale made by one single customer and payed with one payment
+ * by the customer.
  */
 public class Sale {
     private Receipt receipt;
@@ -15,7 +16,7 @@ public class Sale {
     private double totalVAT;
     private List<ItemDTO> boughtItems;
     private double amountOfChange;
-
+    private static final double VAT_DIVISOR = 100;
 
     /**
      * Creates a new instance and a receipt for that instance
@@ -43,7 +44,7 @@ public class Sale {
         double newRunningVAT = 0;
         for (ItemDTO currentItem: boughtItems){
             double priceOfCurrentItem = currentItem.getPrice();
-            double perecentVAT = currentItem.getVAT() / 100;
+            double perecentVAT = currentItem.getVAT() / VAT_DIVISOR;
             newRunningTotal += priceOfCurrentItem;
             newRunningVAT += priceOfCurrentItem * perecentVAT;
         }

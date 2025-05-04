@@ -13,7 +13,8 @@ import se.kth.iv1350.pos.model.SaleDTO;
 import se.kth.iv1350.pos.model.Payment;
 import se.kth.iv1350.pos.model.Receipt;
 /** 
- * This is the application controller. All calls to the model pass through this class.
+ * This is the application controller. All calls to the model pass through this class
+ * which then delegates control to the other layers.
 */
 public class Controller {
     private ItemRegistry itemRegistry;

@@ -24,6 +24,6 @@ public class ItemRegistryTest {
         ItemRegistry instance = new ItemRegistry();
         ItemDTO expResult = itemWithIdentifier12345;
         ItemDTO result = instance.findItem(itemWithIdentifier12345.getIdentifier());
-        assertEquals(expResult, result, "Item in inventory was found");
+        assertEquals(expResult, result, "Item in inventory was not found");
     }
 }

@@ -5,6 +5,10 @@ import java.util.List;
 
 import se.kth.iv1350.pos.integration.ItemDTO;
 
+/**
+ * This represents a snapshot of the Sale class where different 
+ * attributes can be retrieved from the sale.
+ */
 public class SaleDTO {
     private double runningTotal;
     private double totalVAT;

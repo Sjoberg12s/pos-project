@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Represents one receipt, which proves the payment of one sale.
+ * Represents one receipt, which proves the payment of one sale and holds all
+ * the information of a sale that occured.
  */
 public class Receipt {
     private LocalTime saleTime;
@@ -93,6 +94,13 @@ public class Receipt {
         return totalVAT;
     }
 
+    /**
+     * Takes a list of items and a specific item to count how many times that item 
+     * appears in that list and then return how many times it appeared.
+     * @param itemToFindQuantityOf item to check how many times it appears.
+     * @param bougthItemsToCheck list of items to go through.
+     * @return the count of how many times a specified item appears in the list.
+     */
     public int getQuantityOfAnItem(ItemDTO itemToFindQuantityOf, List<ItemDTO> bougthItemsToCheck){
         int count = 0;
         for (ItemDTO currentItem: bougthItemsToCheck){

@@ -1,5 +1,9 @@
 package se.kth.iv1350.pos.model;
 
+/**
+ * Represents a cash register in a pos, it holds a balance which is how
+ * much cash it has and it receives the payment from a customer.
+ */
 public class CashRegister {
     private double balance;
     

@@ -6,7 +6,8 @@ import java.util.List;
 import se.kth.iv1350.pos.model.SaleDTO;
 
 /**
- * ItemRegistry is the item database which is supposed to hold all the information about an item.
+ * ItemRegistry is the item database which is supposed to hold all the information about an item
+ * that exists in the inventory.
  */
 public class ItemRegistry {
     private SaleDTO saleInformation;

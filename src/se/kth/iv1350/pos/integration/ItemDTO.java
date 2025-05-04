@@ -1,7 +1,5 @@
 package se.kth.iv1350.pos.integration;
 
-import java.util.Objects;
-
 /**
  * A class that acts like a item in the store and is only used for get methods to retrieve
  * stuff from that item.
@@ -80,6 +78,10 @@ public class ItemDTO {
         }
     }
 
+    /**
+     * Overrides the equals for ItemDTO so it checks the content
+     * and not the reference.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
