@@ -12,6 +12,6 @@ public class CashRegister {
      * @param payment the amount the customer paid for the entire sale.
      */
     public void addPayment(Payment payment){
-        balance += payment.getAmountPaid();
+        this.balance += payment.getAmountPaid();
     }
 }

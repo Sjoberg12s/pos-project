@@ -19,7 +19,7 @@ public class DiscountRegistry {
      * and returns it.
      * @param idenfication customers identifcation number.
      * @param currentSaleInfo the current sale information.
-     * @return a discount.
+     * @return a discount amount.
      */
     public DiscountDTO findDiscount(int idenfication, SaleDTO currentSaleInfo){
         //Fix a way to store discounts here.

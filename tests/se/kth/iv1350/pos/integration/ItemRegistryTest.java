@@ -26,4 +26,12 @@ public class ItemRegistryTest {
         ItemDTO result = instance.findItem(itemWithIdentifier12345.getIdentifier());
         assertEquals(expResult, result, "Item in inventory was not found");
     }
+
+    @Test
+    public void testFindItemNotFound() {
+        ItemRegistry instance = new ItemRegistry();
+        ItemDTO expResult = null;
+        ItemDTO result = instance.findItem(99999);
+        assertEquals(expResult, result, "Should return null when item is not found");
+    }
 }

@@ -94,7 +94,6 @@ public class Controller {
     public DiscountDTO discountRequest(int idenfication){
         SaleDTO currentSaleInfo = sale.getCurrentSaleState();
         DiscountDTO amountToBeReduced = discountRegistry.findDiscount(idenfication, currentSaleInfo);
-        
         return null;
     }
 

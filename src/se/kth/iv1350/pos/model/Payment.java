@@ -1,5 +1,9 @@
 package se.kth.iv1350.pos.model;
 
+/**
+ * This represents the payment that the customer is supposed to pay with,
+ * the payment is in SEK.
+ */
 public class Payment {
     private double amountPaid;
 
