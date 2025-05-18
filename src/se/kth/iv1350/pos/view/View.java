@@ -1,21 +1,33 @@
 package se.kth.iv1350.pos.view;
 
+import java.io.IOException;
+
 import se.kth.iv1350.pos.controller.Controller;
+import se.kth.iv1350.pos.controller.OperationFailedException;
 import se.kth.iv1350.pos.integration.ItemDTO;
+import se.kth.iv1350.pos.integration.ItemNotFoundException;
+import se.kth.iv1350.pos.model.TotalRevenueFileOutput;
+import se.kth.iv1350.pos.util.LogHandler;
 /**
  * This is a placeholder for the real view. It contains a hardcoded execution with calls to all
  * system operations in the controller.
  */
 public class View {
     private Controller contr;
+    private ErrorMessageHandler errorMsgHandler;
+    private LogHandler logger;
 
     /**
      * Creates a new instance, that uses the specified controller for all calls to other layers.
      * 
      * @param contr The controller to use for all calls to other layers.
      */
-    public View(Controller contr){
+    public View(Controller contr) throws IOException{
         this.contr = contr;
+        contr.addSaleObserver(new TotalRevenueView());
+        contr.addSaleObserver(new TotalRevenueFileOutput());
+        errorMsgHandler = new ErrorMessageHandler();
+        logger = new LogHandler();
     }
 
     /**
@@ -24,38 +36,134 @@ public class View {
      */
     public void runFakeExecution(){
         contr.startSale();
+        double totalCost = 0;
+        double totalVAT = 0;
+        ItemDTO scannedItem = null;
         System.out.println("A new sale has been started.");
 
-        System.out.println("Add 1 item with item id 12345:");
-        ItemDTO scannedItem = contr.scanItem(12345, 1);
-        printItemInformation(scannedItem);
-        double totalCost = contr.retrieveRunningTotal();
-        double totalVAT = contr.retrieveRunningVAT();
-        printRunningTotal(totalCost);
-        printRunningVAT(totalVAT);
+        System.out.println("Add 1 item with item id 12346:");
+        try {
+            scannedItem = contr.scanItem(12346, 1);
+            printItemInformation(scannedItem);
+            totalCost = contr.retrieveRunningTotal();
+            totalVAT = contr.retrieveRunningVAT();
+            printRunningTotal(totalCost);
+            printRunningVAT(totalVAT);
+        } catch (ItemNotFoundException exc) {
+            errorMsgHandler.showErrorMessage(exc.getMessage());
+        } catch (OperationFailedException exc) {
+            writeToLogAndView(exc.getMessage(), exc);
+        }
 
+        try {
+            scannedItem = contr.scanItem(55555, 1);
+            printItemInformation(scannedItem);
+            totalCost = contr.retrieveRunningTotal();
+            totalVAT = contr.retrieveRunningVAT();
+            printRunningTotal(totalCost);
+            printRunningVAT(totalVAT);
+        } catch (ItemNotFoundException exc) {
+            errorMsgHandler.showErrorMessage(exc.getMessage());
+        } catch (OperationFailedException exc) {
+            writeToLogAndView(exc.getMessage(), exc);
+        }
+
+        System.out.println("\nAdd 1 item with item id 12345:");
+        try {
+            scannedItem = contr.scanItem(12345, 1);
+            totalCost = contr.retrieveRunningTotal();
+            totalVAT = contr.retrieveRunningVAT();
+            printItemInformation(scannedItem);
+            printRunningTotal(totalCost);
+            printRunningVAT(totalVAT);
+        } catch (ItemNotFoundException exc) {
+            errorMsgHandler.showErrorMessage(exc.getMessage());
+        } catch (OperationFailedException exc) {
+            writeToLogAndView(exc.getMessage(), exc);
+        }
 
         System.out.println("Add 1 item with item id 12345:");
-        scannedItem = contr.scanItem(12345, 1);
-        totalCost = contr.retrieveRunningTotal();
-        totalVAT = contr.retrieveRunningVAT();
-        printItemInformation(scannedItem);
-        printRunningTotal(totalCost);
-        printRunningVAT(totalVAT);
+        try {
+            scannedItem = contr.scanItem(12345, 1);
+            totalCost = contr.retrieveRunningTotal();
+            totalVAT = contr.retrieveRunningVAT();
+            printItemInformation(scannedItem);
+            printRunningTotal(totalCost);
+            printRunningVAT(totalVAT);
+        } catch (ItemNotFoundException exc) {
+            errorMsgHandler.showErrorMessage(exc.getMessage());
+        } catch (OperationFailedException exc) {
+            writeToLogAndView(exc.getMessage(), exc);
+        }
 
         System.out.println("Add 1 item with item id 54321:");
-        scannedItem = contr.scanItem(54321, 1);
-        totalCost = contr.retrieveRunningTotal();
-        totalVAT = contr.retrieveRunningVAT();
-        printItemInformation(scannedItem);
-        printRunningTotal(totalCost);
-        printRunningVAT(totalVAT);
+        try {
+            scannedItem = contr.scanItem(54321, 1);
+            totalCost = contr.retrieveRunningTotal();
+            totalVAT = contr.retrieveRunningVAT();
+            printItemInformation(scannedItem);
+            printRunningTotal(totalCost);
+            printRunningVAT(totalVAT);
+        } catch (ItemNotFoundException exc) {
+            errorMsgHandler.showErrorMessage(exc.getMessage());
+        } catch (OperationFailedException exc) {
+            writeToLogAndView(exc.getMessage(), exc);
+        }
 
         totalCost = contr.endSale(); //Ends the sale and returns the complete sale.
         printEndSale(totalCost); //Prints the total price for the end of sale.
 
         contr.enterAmountPaid(100);
 
+        contr.startSale();
+        System.out.println("A new sale has been started.");
+
+        System.out.println("Add 1 item with item id 12345:");
+        try {
+            scannedItem = contr.scanItem(12345, 1);
+            totalCost = contr.retrieveRunningTotal();
+            totalVAT = contr.retrieveRunningVAT();
+            printItemInformation(scannedItem);
+            printRunningTotal(totalCost);
+            printRunningVAT(totalVAT);
+        } catch (ItemNotFoundException exc) {
+            errorMsgHandler.showErrorMessage(exc.getMessage());
+        } catch (OperationFailedException exc) {
+            writeToLogAndView(exc.getMessage(), exc);
+        }
+
+        System.out.println("Add 1 item with item id 12345:");
+        try {
+            scannedItem = contr.scanItem(12345, 1);
+            totalCost = contr.retrieveRunningTotal();
+            totalVAT = contr.retrieveRunningVAT();
+            printItemInformation(scannedItem);
+            printRunningTotal(totalCost);
+            printRunningVAT(totalVAT);
+        } catch (ItemNotFoundException exc) {
+            errorMsgHandler.showErrorMessage(exc.getMessage());
+        } catch (OperationFailedException exc) {
+            writeToLogAndView(exc.getMessage(), exc);
+        }
+
+        System.out.println("Add 1 item with item id 54321:");
+        try {
+            scannedItem = contr.scanItem(54321, 1);
+            totalCost = contr.retrieveRunningTotal();
+            totalVAT = contr.retrieveRunningVAT();
+            printItemInformation(scannedItem);
+            printRunningTotal(totalCost);
+            printRunningVAT(totalVAT);
+        } catch (ItemNotFoundException exc) {
+            errorMsgHandler.showErrorMessage(exc.getMessage());
+        } catch (OperationFailedException exc) {
+            writeToLogAndView(exc.getMessage(), exc);
+        }
+
+        totalCost = contr.endSale(); //Ends the sale and returns the complete sale.
+        printEndSale(totalCost); //Prints the total price for the end of sale.
+
+        contr.enterAmountPaid(100);
 
     }
 
@@ -95,6 +203,11 @@ public class View {
     public void printEndSale(double totalCost){
         System.out.println("End sale:");
         printRunningTotal(totalCost);
+    }
+
+    private void writeToLogAndView(String viewMsg, Exception exc) {
+        errorMsgHandler.showErrorMessage(viewMsg);
+        logger.logException(exc);
     }
 
 }

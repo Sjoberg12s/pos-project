@@ -25,11 +25,17 @@ public class ItemRegistry {
     }
     /**
      * Finds the correct item in the item register according to the item identifier, 
-     * if not found then null is returned.
+     * if not found then null is returned. The item database is identfied as being 
+     * turned off if the item identifier 55555 is used.
      * @param identifier the item identifier as a integer.
      * @return the item that corresponds to the identifier
+     * @throws ItemNotFoundException If an item is not found in the database.
+     * @throws ItemRegistryException If there is a failure to access the item database.
      */
-    public ItemDTO findItem(int identifier){
+    public ItemDTO findItem(int identifier) throws ItemNotFoundException{
+        if (identifier == 55555) {
+            throw new ItemRegistryException("Failed to access the item database.");
+        }
         ItemDTO scannedItem = null;
         for (ItemDTO e: itemsInInventory){
             if (identifier == e.getIdentifier()) {
@@ -37,7 +43,7 @@ public class ItemRegistry {
                 return scannedItem;
             }
         }
-        return scannedItem;
+        throw new ItemNotFoundException(identifier);
     }
 
     /**

@@ -17,6 +17,7 @@ public class Sale {
     private List<ItemDTO> boughtItems;
     private double amountOfChange;
     private static final double VAT_DIVISOR = 100;
+    private List<SaleObserver> saleObservers = new ArrayList<>();
 
     /**
      * Creates a new instance and a receipt for that instance
@@ -33,8 +34,10 @@ public class Sale {
      * @param quantity the quantity of that item.
      */
     public void addItem(ItemDTO scannedItem, int quantity){
-        for (int i = 0; i < quantity; i++){
+        if(scannedItem != null){
+            for (int i = 0; i < quantity; i++){
             this.boughtItems.add(scannedItem);
+            }
         }
         updateRunningTotals();
     }
@@ -75,6 +78,21 @@ public class Sale {
      */
     public void calculateChange(Payment payment){
         amountOfChange = payment.getAmountPaid() - runningTotal;
+        notifyObservers();
+    }
+
+    private void notifyObservers() {
+        for (SaleObserver obs : saleObservers) {
+            obs.newSale(getCurrentSaleState());
+        }
+    }
+
+    /**
+     * All the specified observers will be notified when this sale has been paid for.
+     * @param observers the observers to notify.
+     */
+    public void addSaleObservers(List<SaleObserver> observers) {
+        saleObservers.addAll(observers);
     }
 
     /**
